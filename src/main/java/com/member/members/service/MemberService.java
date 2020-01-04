@@ -37,22 +37,31 @@ public class MemberService {
     }
 
     public String getSelectedMember(String username, String password ){
-        System.out.println(username);
-        System.out.println(password);
+
         List<Member> x = this.getAllMembers();
         try{
             Member reqMember =  x.stream().filter(m->m.getUsername().equals(username)).findFirst().get();
             if(password.equals(reqMember.getPassword()) == false){
-                return "Invalid username/ password.";
+                return "Invalid Username/Password";
             }else{
-                return "Login successful";
+                return "Login Successful";
             }
         }catch(NoSuchElementException e){
-            return "Invalid Username / Password";
+            return "Invalid Username/Password";
         }
 
 
 
+    }
+
+    public String getMemberName(String username){
+        List<Member>x = this.getAllMembers();
+        try{
+            Member reqMember =  x.stream().filter(m->m.getUsername().equals(username)).findFirst().get();
+            return reqMember.getName();
+        }catch(NoSuchElementException e){
+            return null;
+        }
     }
 
 
