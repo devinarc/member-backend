@@ -14,13 +14,14 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600) //it is to enable the cors for the api class
+@RequestMapping(value="/api")
 public class WeatherResources {
 
     @Autowired
     private WeatherService weatherService;
 
-    @GetMapping(value="/weather")
-    public String getWeatherForecast (@RequestBody String json) {
+    @GetMapping(value="/specificWeather")
+    public String getSpecificWeatherForecast (@RequestBody String json) {
 
         ObjectMapper mapper = new ObjectMapper();
         HashMap<String, Object> map = new HashMap<String, Object>();
@@ -40,5 +41,10 @@ public class WeatherResources {
         }
 
        return result;
+    }
+
+    @GetMapping(value="/locations")
+    public String getLocations(){
+        return weatherService.getLocations();
     }
 }
